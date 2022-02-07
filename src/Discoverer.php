@@ -52,7 +52,7 @@ final class Discoverer
         /** @var array<class-string> $ignorableBootloaders */
         $ignorableBootloaders = [];
         foreach ($this->registries as $registry) {
-            $ignorableBootloaders[] = \array_merge(
+            $ignorableBootloaders = \array_merge(
                 $ignorableBootloaders,
                 $registry->getIgnorableBootloaders()
             );
