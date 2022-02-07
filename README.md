@@ -65,14 +65,21 @@ $app = App::create([
 
 $app->discoverBootloadersFrom(
     // Will load bootloaders from composer.json and from other installed composer packages
+    //    "extra": {
+    //        "spiral": {
+    //            "bootloaders": [
+    //                "Spiral\\Monolog\\Bootloader\\DotenvBootloader",
+    //                "Spiral\\DotEnv\\Bootloader\\MonologBootloader",
+    //            ],
+    //            "dont-discover": {
+    //                "spiral-packages/event-bus"
+    //            }
+    //        }
+    //    },
     new \Spiral\BootloadersDiscover\Registry\ComposerRegistry(), 
     
     // Will load bootloaders from passed array of bootloaders
     new \Spiral\BootloadersDiscover\Registry\ArrayRegistry([
-        // Base extensions
-        DotEnv\DotenvBootloader::class,
-        Monolog\MonologBootloader::class,
-
         // Application specific logs
         Bootloader\LoggingBootloader::class,
         
