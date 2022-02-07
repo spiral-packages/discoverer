@@ -83,9 +83,8 @@ $app->discoverBootloadersFrom(
     // Will load bootloaders from config/bootloaders.php
     new \Spiral\BootloadersDiscover\Registry\ConfigRegistry() 
 );
-$app->run();
 
-if ($app !== null) {
+if ($app->run() !== null) {
     $code = (int)$app->serve();
     exit($code);
 }
