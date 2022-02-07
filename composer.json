@@ -1,6 +1,6 @@
 {
   "name": "spiral-packages/bootloaders-discover",
-  "description": "This is my package bootloaders-discover",
+  "description": "Bootloaders discoverer for Spiral Framework",
   "keywords": [
     "spiral-packages",
     "spiral",
