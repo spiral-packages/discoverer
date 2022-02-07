@@ -26,15 +26,18 @@ final class ComposerRegistry implements RegistryInterface
 
         if ($this->files->exists($path = $this->vendorDir.'/composer/installed.json')) {
             $installed = \json_decode($this->files->read($path), true);
-            $this->packages = $installed['packages'] ?? $installed;
+            $packages = $installed['packages'] ?? $installed;
 
-            foreach ($this->packages as $package) {
-                $this->packages[$this->formatPackageName(
-                    $package['name']
-                )] = \array_merge([
+            foreach ($packages as $package) {
+                if (! isset($package['extra']['spiral'])) {
+                    continue;
+                }
+
+                $packageName = $this->formatPackageName($package['name']);
+                $this->packages[$packageName] = \array_merge([
                     'bootloaders' => [],
                     'dont-discover' => [],
-                ], (array)($package['extra']['spiral'] ?? []));
+                ], (array)$package['extra']['spiral']);
             }
         }
     }
