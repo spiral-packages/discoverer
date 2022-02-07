@@ -1,7 +1,6 @@
 # Bootloaders discoverer for Spiral Framework
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spiral-packages/bootloaders-discover.svg?style=flat-square)](https://packagist.org/packages/spiral-packages/bootloaders-discover)
-[![GitHpprivate  mixed $files;tem;ps://img.shields.io/github/workflow/status/spiral-packages/bootloaders-discover/run-tests?label=tests)](https://github.com/spiral-packages/bootloaders-discover/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/spiral-packages/bootloaders-discover.svg?style=flat-square)](https://packagist.org/packages/spiral-packages/bootloaders-discover)
 
 ## Requirements
@@ -83,9 +82,8 @@ $app->discoverBootloadersFrom(
     // Will load bootloaders from config/bootloaders.php
     new \Spiral\BootloadersDiscover\Registry\ConfigRegistry() 
 );
-$app->run();
 
-if ($app !== null) {
+if ($app->run() !== null) {
     $code = (int)$app->serve();
     exit($code);
 }
