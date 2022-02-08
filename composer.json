@@ -23,7 +23,7 @@
   "require-dev": {
     "mockery/mockery": "^1.5",
     "phpunit/phpunit": "^9.5",
-    "spiral/testing": "dev-master as 1.0",
+    "spiral/testing": "^1.0",
     "vimeo/psalm": "^4.9"
   },
   "autoload": {
