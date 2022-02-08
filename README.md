@@ -31,7 +31,7 @@ class App extends Kernel
 }
 ```
 
-And then you should modify you `app.php` file. 
+And then you should modify you `app.php` file.
 
 ```php
 <?php
@@ -71,9 +71,9 @@ $app->discoverBootloadersFrom(
     //                "Spiral\\Monolog\\Bootloader\\DotenvBootloader",
     //                "Spiral\\DotEnv\\Bootloader\\MonologBootloader",
     //            ],
-    //            "dont-discover": {
+    //            "dont-discover": [
     //                "spiral-packages/event-bus"
-    //            }
+    //            ]
     //        }
     //    },
     new \Spiral\BootloadersDiscover\Registry\ComposerRegistry(), 

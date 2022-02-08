@@ -1,0 +1,13 @@
+{
+  "extra": {
+    "spiral": {
+      "bootloaders": [
+        "Spiral\\Monolog\\Bootloader\\DotenvBootloader",
+        "Spiral\\DotEnv\\Bootloader\\MonologBootloader"
+      ],
+      "dont-discover": [
+        "spiral-packages/event-bus"
+      ]
+    }
+  }
+}

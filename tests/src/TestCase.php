@@ -2,7 +2,7 @@
 
 namespace Spiral\BootloadersDiscover\Tests;
 
-class TestCase extends \Spiral\Testing\TestCase
+abstract class TestCase extends \Spiral\Testing\TestCase
 {
     public function rootDirectory(): string
     {
@@ -12,8 +12,7 @@ class TestCase extends \Spiral\Testing\TestCase
     public function defineBootloaders(): array
     {
         return [
-            \Spiral\Boot\Bootloader\ConfigurationBootloader::class,
-            \Spiral\BootloadersDiscover\BootloadersDiscoverBootloader::class,
+            \Spiral\Boot\Bootloader\CoreBootloader::class,
             // ...
         ];
     }
