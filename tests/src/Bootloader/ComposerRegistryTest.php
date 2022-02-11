@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Spiral\BootloadersDiscover\Tests\Registry;
+namespace Spiral\BootloadersDiscover\Tests\Bootloader;
 
-use Spiral\BootloadersDiscover\Registry\ComposerRegistry;
-use Spiral\BootloadersDiscover\Tests\TestCase;
+use Spiral\Discoverer\Bootloader\ComposerRegistry;
+use Spiral\Discoverer\Tests\TestCase;
 
 final class ComposerRegistryTest extends TestCase
 {
@@ -35,6 +35,6 @@ final class ComposerRegistryTest extends TestCase
         $this->assertSame([
             'Spiral\EventBus\Bootloader\EventBusBootloader',
             'Spiral\PackageB\Bootloader\PackageBBootloader',
-        ], $this->registry->getIgnorableBootloaders());
+        ], $this->registry->getIgnoredBootloaders());
     }
 }

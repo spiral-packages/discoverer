@@ -1,10 +1,10 @@
 {
   "name": "spiral-packages/discoverer",
-  "description": "Bootloaders discoverer for Spiral Framework",
+  "description": "Discoverer for Spiral Framework",
   "keywords": [
     "spiral-packages",
     "spiral",
-    "bootloaders-discover"
+    "discoverer"
   ],
   "homepage": "https://github.com/spiral-packages/bootloaders-discover",
   "license": "MIT",
@@ -17,8 +17,7 @@
   ],
   "require": {
     "php": "^8.0",
-    "spiral/boot": "^2.9",
-    "spiral/files": "^2.9"
+    "spiral/framework": "^2.9"
   },
   "require-dev": {
     "mockery/mockery": "^1.5",
@@ -28,13 +27,20 @@
   },
   "autoload": {
     "psr-4": {
-      "Spiral\\BootloadersDiscover\\": "src"
+      "Spiral\\Discoverer\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Spiral\\BootloadersDiscover\\Tests\\App\\": "tests/app",
-      "Spiral\\BootloadersDiscover\\Tests\\": "tests/src"
+      "Spiral\\Discoverer\\Tests\\App\\": "tests/app",
+      "Spiral\\Discoverer\\Tests\\": "tests/src"
+    }
+  },
+  "extra": {
+    "spiral": {
+      "bootloaders": [
+        "Spiral\\Discoverer\\DiscovererBootloader"
+      ]
     }
   },
   "scripts": {
@@ -42,7 +48,10 @@
     "psalm": "vendor/bin/psalm --config=psalm.xml ./src"
   },
   "config": {
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "spiral/composer-publish-plugin": true
+    }
   },
   "minimum-stability": "dev",
   "prefer-stable": true

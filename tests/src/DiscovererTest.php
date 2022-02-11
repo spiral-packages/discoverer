@@ -2,44 +2,53 @@
 
 declare(strict_types=1);
 
-namespace Spiral\BootloadersDiscover\Tests;
+namespace Spiral\Discoverer\Tests;
 
-use Spiral\BootloadersDiscover\Discoverer;
-use Spiral\BootloadersDiscover\RegistryInterface;
+use Spiral\Core\Container;
+use Spiral\Discoverer\Discoverer;
+use Spiral\Discoverer\DiscovererRegistryInterface;
+use Spiral\Discoverer\Exception\DiscovererRegistryException;
 
 final class DiscovererTest extends TestCase
 {
-    public function testDiscover(): void
+    public function testDiscoverExistsDiscoverer(): void
     {
-        $discover = new Discoverer(
-            $registry1 = $this->mockContainer(RegistryInterface::class),
-            $registry2 = $this->mockContainer(RegistryInterface::class),
+        $discoverer = new Discoverer(
+            $this->getContainer(),
+            new class implements DiscovererRegistryInterface {
+
+                public static function getName(): string
+                {
+                    return 'test';
+                }
+
+                public function discover(): array
+                {
+                    return [
+                        'foo',
+                        'bar',
+                    ];
+                }
+
+                public function init(Container $container): void
+                {
+
+                }
+            }
         );
 
-        $registry1->shouldReceive('init')->once()->with($this->getContainer());
-        $registry2->shouldReceive('init')->once()->with($this->getContainer());
-
-        $registry1->shouldReceive('getIgnorableBootloaders')->once()->andReturn([
-            'BootloaderC',
-        ]);
-
-        $registry2->shouldReceive('getIgnorableBootloaders')->once()->andReturn([
-            'BootloaderA',
-        ]);
-
-        $registry1->shouldReceive('getBootloaders')->once()->andReturn([
-            'BootloaderA',
-            'BootloaderB',
-        ]);
-
-        $registry2->shouldReceive('getBootloaders')->once()->andReturn([
-            'BootloaderC',
-            'BootloaderD',
-        ]);
-
         $this->assertSame([
-            'BootloaderB' => [],
-            'BootloaderD' => [],
-        ], $discover->discover($this->getContainer()));
+            'foo',
+            'bar'
+        ], $discoverer->discover('test'));
+    }
+
+    public function testNonExistDiscovererShouldThrowAnException()
+    {
+        $this->expectException(DiscovererRegistryException::class);
+        $this->expectErrorMessage('Registry with name [test] does not exist.');
+
+        $discoverer = new Discoverer($this->getContainer());
+        $discoverer->discover('test');
     }
 }

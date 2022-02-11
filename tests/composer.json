@@ -7,7 +7,18 @@
       ],
       "dont-discover": [
         "spiral-packages/event-bus"
-      ]
+      ],
+      "directories": {
+        "self": [
+          "src/Listener"
+        ],
+        "spiral-packages/notifications": [
+          "src/foo",
+          "src/bar"
+        ],
+        "spiral-packages/event-bus": "src/bar",
+        "spiral-packages/test": "src/bar"
+      }
     }
   }
 }

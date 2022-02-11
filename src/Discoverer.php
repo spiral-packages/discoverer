@@ -1,70 +1,36 @@
 <?php
 
-namespace Spiral\BootloadersDiscover;
+namespace Spiral\Discoverer;
 
 use Spiral\Core\Container;
+use Spiral\Discoverer\Exception\DiscovererRegistryException;
 
-final class Discoverer
+final class Discoverer implements DiscovererInterface
 {
-    /** @var RegistryInterface[] */
+    /** @var DiscovererRegistryInterface[] */
     private array $registries;
 
-    public function __construct(RegistryInterface ...$registries)
-    {
-        $this->registries = $registries;
-    }
-
-    /**
-     * @return array<class-string, array<non-empty-string, mixed>>
-     */
-    public function discover(Container $container): array
-    {
-        $this->initRegistries($container);
-
-        $bootloaders = [];
-        $ignorableBootloaders = $this->getIgnorableBootloaders();
-
-        foreach ($this->registries as $registry) {
-            $registryBootloaders = $registry->getBootloaders();
-
-            foreach ($registryBootloaders as $class => $options) {
-                if (\is_string($options)) {
-                    $class = $options;
-                    $options = [];
-                }
-
-                if (isset($bootloaders[$class]) || \in_array($class, $ignorableBootloaders)) {
-                    continue;
-                }
-
-                $bootloaders[$class] = $options;
-            }
-        }
-
-        return $bootloaders;
-    }
-
-    /**
-     * @return array<class-string>
-     */
-    protected function getIgnorableBootloaders(): array
-    {
-        /** @var array<class-string> $ignorableBootloaders */
-        $ignorableBootloaders = [];
-        foreach ($this->registries as $registry) {
-            $ignorableBootloaders = \array_merge(
-                $ignorableBootloaders,
-                $registry->getIgnorableBootloaders()
-            );
-        }
-
-        return \array_unique($ignorableBootloaders);
-    }
-
-    protected function initRegistries(Container $container): void
-    {
-        foreach ($this->registries as $registry) {
+    public function __construct(
+        private Container $container,
+        DiscovererRegistryInterface ...$registries
+    ) {
+        foreach ($registries as $registry) {
+            $this->registries[$registry::getName()] = $registry;
             $registry->init($container);
         }
+    }
+
+    public function discover(string $name): array
+    {
+        if ($this->has($name)) {
+            return $this->registries[$name]->discover();
+        }
+
+        throw new DiscovererRegistryException(\sprintf('Registry with name [%s] does not exist.', $name));
+    }
+
+    public function has(string $name): bool
+    {
+        return isset($this->registries[$name]);
     }
 }

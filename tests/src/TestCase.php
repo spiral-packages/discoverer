@@ -1,6 +1,8 @@
 <?php
 
-namespace Spiral\BootloadersDiscover\Tests;
+namespace Spiral\Discoverer\Tests;
+
+use Spiral\Discoverer\DiscovererBootloader;
 
 abstract class TestCase extends \Spiral\Testing\TestCase
 {
@@ -13,7 +15,7 @@ abstract class TestCase extends \Spiral\Testing\TestCase
     {
         return [
             \Spiral\Boot\Bootloader\CoreBootloader::class,
-            // ...
+            DiscovererBootloader::class,
         ];
     }
 }

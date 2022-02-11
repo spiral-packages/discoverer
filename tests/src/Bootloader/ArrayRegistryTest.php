@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Spiral\BootloadersDiscover\Tests\Registry;
+namespace Spiral\Discoverer\Tests\Bootloader;
 
-use Spiral\BootloadersDiscover\Registry\ArrayRegistry;
-use Spiral\BootloadersDiscover\Tests\TestCase;
+use Spiral\Discoverer\Bootloader\ArrayRegistry;
+use Spiral\Discoverer\Tests\TestCase;
 
 final class ArrayRegistryTest extends TestCase
 {
@@ -26,6 +26,6 @@ final class ArrayRegistryTest extends TestCase
             'BootloaderB',
         ]);
 
-        $this->assertSame($bootloaders, $registry->getIgnorableBootloaders());
+        $this->assertSame($bootloaders, $registry->getIgnoredBootloaders());
     }
 }

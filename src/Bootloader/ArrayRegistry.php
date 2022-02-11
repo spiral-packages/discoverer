@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Spiral\BootloadersDiscover\Registry;
+namespace Spiral\Discoverer\Bootloader;
 
-use Spiral\BootloadersDiscover\RegistryInterface;
 use Spiral\Core\Container;
 
-final class ArrayRegistry implements RegistryInterface
+final class ArrayRegistry implements BootloaderRegistryInterface
 {
     /**
      * @param array<class-string, array<non-empty-string, mixed>> $bootloaders
@@ -28,7 +27,7 @@ final class ArrayRegistry implements RegistryInterface
         return $this->bootloaders;
     }
 
-    public function getIgnorableBootloaders(): array
+    public function getIgnoredBootloaders(): array
     {
         return $this->ignorableBootloaders;
     }

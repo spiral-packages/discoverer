@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Spiral\BootloadersDiscover\Tests\Registry;
+namespace Spiral\Discoverer\Tests\Bootloader;
 
-use Spiral\BootloadersDiscover\Config\BootloadersConfig;
-use Spiral\BootloadersDiscover\Registry\ConfigRegistry;
-use Spiral\BootloadersDiscover\Tests\TestCase;
+use Spiral\Discoverer\Config\DiscovererConfig;
+use Spiral\Discoverer\Bootloader\ConfigRegistry;
+use Spiral\Discoverer\Tests\TestCase;
 
 final class ConfigRegistryTest extends TestCase
 {
@@ -16,12 +16,12 @@ final class ConfigRegistryTest extends TestCase
     {
         parent::setUp();
 
-        $this->getContainer()->bindSingleton(BootloadersConfig::class, new BootloadersConfig([
+        $this->getContainer()->bindSingleton(DiscovererConfig::class, new DiscovererConfig([
             'bootloaders' => [
                 'BootloaderA',
                 'BootloaderB',
             ],
-            'ignorableBootloaders' => [
+            'ignoredBootloaders' => [
                 'BootloaderC',
                 'BootloaderC',
             ],
@@ -33,21 +33,17 @@ final class ConfigRegistryTest extends TestCase
 
     public function testGetsBootloaders(): void
     {
-        $registry = new ConfigRegistry();
-
         $this->assertSame([
             'BootloaderA',
             'BootloaderB',
         ], $this->registry->getBootloaders());
     }
 
-    public function testGetsIgnorableBootloaders(): void
+    public function testGetsIgnoredBootloaders(): void
     {
-        $registry = new ConfigRegistry();
-
         $this->assertSame([
             'BootloaderC',
             'BootloaderC',
-        ], $this->registry->getIgnorableBootloaders());
+        ], $this->registry->getIgnoredBootloaders());
     }
 }
