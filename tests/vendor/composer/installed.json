@@ -1,0 +1,65 @@
+{
+  "packages": [
+    {
+      "install-path": "../foo/scheduler",
+      "name": "spiral-packages/scheduler",
+      "extra": {
+        "spiral": {
+          "bootloaders": [
+            "Spiral\\Scheduler\\Bootloader\\SchedulerBootloader"
+          ],
+          "directories": [
+            "src/foo"
+          ]
+        }
+      }
+    },
+    {
+      "install-path": "../foo/event-bus",
+      "name": "spiral-packages/event-bus",
+      "extra": {
+        "spiral": {
+          "bootloaders": [
+            "Spiral\\EventBus\\Bootloader\\EventBusBootloader"
+          ]
+        }
+      }
+    },
+    {
+      "install-path": "../foo/notifications",
+      "name": "spiral-packages/notifications",
+      "extra": {
+        "spiral": {
+          "bootloaders": [
+            "Spiral\\Notifications\\Bootloader\\NotificationsBootloader"
+          ]
+        }
+      }
+    },
+    {
+      "install-path": "../foo/package-a",
+      "name": "spiral-packages/package-a",
+      "extra": {
+        "spiral": {
+          "bootloaders": [
+            "Spiral\\PackageA\\Bootloader\\PackageABootloader"
+          ],
+          "dont-discover": [
+            "spiral-packages/package-b"
+          ]
+        }
+      }
+    },
+    {
+      "install-path": "../foo/package-b",
+      "name": "spiral-packages/package-b",
+      "extra": {
+        "spiral": {
+          "bootloaders": [
+            "Spiral\\PackageB\\Bootloader\\PackageBBootloader"
+          ]
+        }
+      }
+    }
+  ]
+}

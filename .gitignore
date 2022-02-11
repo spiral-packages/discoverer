@@ -6,6 +6,6 @@ build
 composer.lock
 coverage
 docs
-vendor
+/vendor
 node_modules
 .php-cs-fixer.cache
