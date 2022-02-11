@@ -1,5 +1,6 @@
 # Discoverer for Spiral Framework
 
+[![PHP](https://img.shields.io/packagist/php-v/spiral-packages/discoverer.svg?style=flat-square)](https://packagist.org/packages/spiral-packages/discoverer)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spiral-packages/discoverer.svg?style=flat-square)](https://packagist.org/packages/spiral-packages/discoverer)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/spiral-packages/discoverer/run-tests?label=tests)](https://github.com/spiral-packages/discoverer/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/spiral-packages/discoverer.svg?style=flat-square)](https://packagist.org/packages/spiral-packages/discoverer)
