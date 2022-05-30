@@ -29,7 +29,7 @@ final class ComposerRegistry implements BootloaderRegistryInterface
         $ignore = $this->getComposer()->getComposerExtra('dont-discover', []);
 
         foreach ($this->getComposer()->getPackages() as $extra) {
-            $ignore = array_merge(
+            $ignore = \array_merge(
                 $ignore,
                 (array)($extra['dont-discover'] ?? [])
             );

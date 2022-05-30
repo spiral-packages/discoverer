@@ -13,9 +13,12 @@ final class Composer
     private array $packageDirs = [];
     private array $composerExtra;
 
-    public function __construct(FilesInterface $files, private string $rootDir, string $extraKey = 'spiral')
-    {
-        $this->vendorDir = rtrim($rootDir, '\/').'/vendor';
+    public function __construct(
+        FilesInterface $files,
+        private readonly string $rootDir,
+        string $extraKey = 'spiral'
+    ) {
+        $this->vendorDir = \rtrim($rootDir, '\/').'/vendor';
 
         if ($files->exists($path = $this->vendorDir.'/composer/installed.json')) {
             $installed = \json_decode($files->read($path), true);
@@ -35,7 +38,7 @@ final class Composer
 
         if ($files->isFile($composerPath = $this->rootDir.'/composer.json')) {
             $data = \json_decode(
-                file_get_contents($composerPath),
+                \file_get_contents($composerPath),
                 true
             );
 
@@ -69,7 +72,7 @@ final class Composer
 
     private function formatPackageName(string $name): string
     {
-        return str_replace($this->vendorDir.'/', '', $name);
+        return \str_replace($this->vendorDir.'/', '', $name);
     }
 
     public function getPackages(): array

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Spiral\Discoverer\Bootloader;
 
+use Spiral\Boot\Bootloader\BootloaderInterface;
 use Spiral\Core\Container;
 use Spiral\Discoverer\DiscovererRegistryInterface;
 
@@ -54,7 +55,7 @@ class BootloadersDiscoverer implements DiscovererRegistryInterface
     }
 
     /**
-     * @return array<class-string>
+     * @return array<class-string<BootloaderInterface>>
      */
     private function getIgnoredBootloaders(): array
     {

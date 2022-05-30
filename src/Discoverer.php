@@ -11,7 +11,7 @@ final class Discoverer implements DiscovererInterface
     private array $registries;
 
     public function __construct(
-        private Container $container,
+        Container $container,
         DiscovererRegistryInterface ...$registries
     ) {
         foreach ($registries as $registry) {
