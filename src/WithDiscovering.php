@@ -22,10 +22,10 @@ trait WithDiscovering
 
     protected function defineBootloaders(): array
     {
-        if (! $this->discoverer) {
+        if ($this->discoverer === null) {
             return parent::defineBootloaders();
         }
 
-        return $this->discoverer->discover(BootloadersDiscoverer::getName());
+        return parent::defineBootloaders() + $this->discoverer->discover(BootloadersDiscoverer::getName());
     }
 }

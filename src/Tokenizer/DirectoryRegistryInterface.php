@@ -8,5 +8,8 @@ use Spiral\Discoverer\RegistryInterface;
 
 interface DirectoryRegistryInterface extends RegistryInterface
 {
+    /**
+     * @return non-empty-string[]
+     */
     public function getDirectories(): array;
 }

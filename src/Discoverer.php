@@ -2,16 +2,16 @@
 
 namespace Spiral\Discoverer;
 
-use Spiral\Core\Container;
+use Psr\Container\ContainerInterface;
 use Spiral\Discoverer\Exception\DiscovererRegistryException;
 
 final class Discoverer implements DiscovererInterface
 {
     /** @var DiscovererRegistryInterface[] */
-    private array $registries;
+    private array $registries = [];
 
     public function __construct(
-        Container $container,
+        ContainerInterface $container,
         DiscovererRegistryInterface ...$registries
     ) {
         foreach ($registries as $registry) {

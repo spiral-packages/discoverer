@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Spiral\Discoverer;
 
-use Spiral\Core\Container;
+use Psr\Container\ContainerInterface;
 
 interface RegistryInterface
 {
-    public function init(Container $container): void;
+    public function init(ContainerInterface $container): void;
 }

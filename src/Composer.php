@@ -11,7 +11,7 @@ final class Composer
     private string $vendorDir;
     private array $packages = [];
     private array $packageDirs = [];
-    private array $composerExtra;
+    private array $composerExtra = [];
 
     public function __construct(
         FilesInterface $files,
@@ -46,7 +46,7 @@ final class Composer
         }
     }
 
-    public function getComposerExtra(string $key, $default = null)
+    public function getComposerExtra(string $key, mixed $default = null): mixed
     {
         return $this->composerExtra[$key] ?? $default;
     }

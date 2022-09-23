@@ -7,5 +7,6 @@ namespace Spiral\Discoverer;
 interface DiscovererRegistryInterface extends RegistryInterface
 {
     public static function getName(): string;
+
     public function discover(): array;
 }

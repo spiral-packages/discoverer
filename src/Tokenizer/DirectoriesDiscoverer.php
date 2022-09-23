@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Spiral\Discoverer\Tokenizer;
 
-use Spiral\Core\Container;
+use Psr\Container\ContainerInterface;
 use Spiral\Discoverer\DiscovererRegistryInterface;
 
 final class DirectoriesDiscoverer implements DiscovererRegistryInterface
 {
-    /**
-     * @var DirectoryRegistryInterface[]
-     */
+    /** @var DirectoryRegistryInterface[] */
     private array $registries;
 
     public function __construct(DirectoryRegistryInterface ...$registry)
@@ -24,6 +22,9 @@ final class DirectoriesDiscoverer implements DiscovererRegistryInterface
         return 'directories';
     }
 
+    /**
+     * @return non-empty-string[]
+     */
     public function discover(): array
     {
         $dirs = [];
@@ -35,7 +36,7 @@ final class DirectoriesDiscoverer implements DiscovererRegistryInterface
         return \array_values(\array_unique(\array_filter($dirs)));
     }
 
-    public function init(Container $container): void
+    public function init(ContainerInterface $container): void
     {
         foreach ($this->registries as $registry) {
             $registry->init($container);
