@@ -1,9 +1,10 @@
 # Discoverer for Spiral Framework
 
-[![PHP](https://img.shields.io/packagist/php-v/spiral-packages/discoverer.svg?style=flat-square)](https://packagist.org/packages/spiral-packages/discoverer)
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spiral-packages/discoverer.svg?style=flat-square)](https://packagist.org/packages/spiral-packages/discoverer)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/spiral-packages/discoverer/run-tests?label=tests)](https://github.com/spiral-packages/discoverer/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/spiral-packages/discoverer.svg?style=flat-square)](https://packagist.org/packages/spiral-packages/discoverer)
+[![PHP Version Require](https://poser.pugx.org/spiral-packages/discoverer/require/php)](https://packagist.org/packages/spiral-packages/discoverer)
+[![Latest Stable Version](https://poser.pugx.org/spiral-packages/discoverer/v/stable)](https://packagist.org/packages/spiral-packages/discoverer)
+[![phpunit](https://github.com/spiral-packages/discoverer/actions/workflows/phpunit.yml/badge.svg)](https://github.com/spiral-packages/discoverer/actions)
+[![psalm](https://github.com/spiral-packages/discoverer/actions/workflows/psalm.yml/badge.svg)](https://github.com/spiral-packages/discoverer/actions)
+[![Total Downloads](https://poser.pugx.org/spiral-packages/discoverer/downloads)](https://packagist.org/spiral-packages/discoverer/phpunit)
 
 ## Requirements
 
@@ -36,7 +37,7 @@ kernel.
 use Spiral\Discoverer\WithDiscovering;
 use Spiral\Framework\Kernel;
 
-class App extends Kernel 
+class App extends Kernel
 {
     use WithDiscovering;
 }
@@ -75,14 +76,16 @@ $app = App::create([
 ]);
 
 $app->discover(
+    // Bootloaders sources
     new \Spiral\Discoverer\Bootloader\BootloadersDiscoverer(
         new \Spiral\Discoverer\Bootloader\ComposerRegistry(),
         new \Spiral\Discoverer\Bootloader\ArrayRegistry(...),
-        new \Spiral\Discoverer\Bootloader\ConfigRegistry() 
+        new \Spiral\Discoverer\Bootloader\ConfigRegistry()
     ),
-    
+
+    // Tokenizer directories
     new \Spiral\Discoverer\Tokenizer\DirectoriesDiscoverer(
-        new \Spiral\Discoverer\Tokenizer\ComposerRegistry(), 
+        new \Spiral\Discoverer\Tokenizer\ComposerRegistry(),
     )
 );
 
@@ -147,7 +150,7 @@ Will register bootloaders from the passed array
 new \Spiral\Discoverer\Bootloader\ArrayRegistry([
     // Application specific logs
     Bootloader\LoggingBootloader::class,
-    
+
     // ...
 ]),
 ```
@@ -196,12 +199,12 @@ final class JsonRegistry implements BootloaderRegistryInterface
 {
     private array $bootloaders = [];
     private array $ignorableBootloaders = [];
- 
+
     public function __construct(
         private string $jsonPath
     ) {
     }
-    
+
     public function init(Container $container): void
     {
         // json structure
@@ -212,10 +215,10 @@ final class JsonRegistry implements BootloaderRegistryInterface
         //    ],
         //    "ignored_bootloaders": []
         //}
-        
+
         $files = $container->get(FilesInterface::class);
         $data = \json_decode($files->read($this->jsonPath), true);
-        
+
         $this->bootloaders = $data['bootloaders'] ?? [];
         $this->ignorableBootloaders = $data['ignored_bootloaders'] ?? [];
     }
@@ -277,7 +280,7 @@ Will register directories from application `composer.json` and from other instal
 ```
 
 ```php
-new \Spiral\Discoverer\Tokenizer\ComposerRegistry(), 
+new \Spiral\Discoverer\Tokenizer\ComposerRegistry(),
 ```
 
 #### Custom Directory registry
@@ -293,12 +296,12 @@ use Spiral\Files\FilesInterface;
 final class JsonRegistry implements DirectoryRegistryInterface
 {
     private array $directories = [];
- 
+
     public function __construct(
         private string $jsonPath
     ) {
     }
-    
+
     public function init(Container $container): void
     {
         // json structure
@@ -308,12 +311,12 @@ final class JsonRegistry implements DirectoryRegistryInterface
         //        "src/Entities"
         //    ]
         // }
-        
+
         $root = $container->get(\Spiral\Boot\DirectoriesInterface::class)->get('root');
-        
+
         $files = $container->get(FilesInterface::class);
         $data = \json_decode($files->read($this->jsonPath), true);
-        
+
         $this->directories = \array_map(function (string $dir) use($root) {
             return $root . $dir;
         }, $data['directories'] ?? []);

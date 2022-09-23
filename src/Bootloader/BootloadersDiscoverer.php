@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace Spiral\Discoverer\Bootloader;
 
+use Psr\Container\ContainerInterface;
 use Spiral\Boot\Bootloader\BootloaderInterface;
-use Spiral\Core\Container;
+use Spiral\Boot\BootloadManagerInterface;
 use Spiral\Discoverer\DiscovererRegistryInterface;
 
+/**
+ * @psalm-import-type TClass from BootloadManagerInterface
+ */
 class BootloadersDiscoverer implements DiscovererRegistryInterface
 {
-    /**
-     * @var BootloaderRegistryInterface[]
-     */
+    /** @var BootloaderRegistryInterface[] */
     private array $registries;
 
     public function __construct(BootloaderRegistryInterface ...$registry)
@@ -25,6 +27,9 @@ class BootloadersDiscoverer implements DiscovererRegistryInterface
         return 'bootloaders';
     }
 
+    /**
+     * @return array<class-string<BootloaderInterface>, array>
+     */
     public function discover(): array
     {
         $bootloaders = [];
@@ -55,11 +60,10 @@ class BootloadersDiscoverer implements DiscovererRegistryInterface
     }
 
     /**
-     * @return array<class-string<BootloaderInterface>>
+     * @return TClass[]
      */
     private function getIgnoredBootloaders(): array
     {
-        /** @var array<class-string> $ignorableBootloaders */
         $ignorableBootloaders = [];
         foreach ($this->registries as $registry) {
             if (! $registry instanceof BootloaderRegistryInterface) {
@@ -75,7 +79,7 @@ class BootloadersDiscoverer implements DiscovererRegistryInterface
         return \array_unique($ignorableBootloaders);
     }
 
-    public function init(Container $container): void
+    public function init(ContainerInterface $container): void
     {
         foreach ($this->registries as $registry) {
             $registry->init($container);

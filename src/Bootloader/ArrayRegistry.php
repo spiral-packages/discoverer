@@ -4,22 +4,25 @@ declare(strict_types=1);
 
 namespace Spiral\Discoverer\Bootloader;
 
-use Spiral\Boot\Bootloader\BootloaderInterface;
-use Spiral\Core\Container;
+use Psr\Container\ContainerInterface;
+use Spiral\Boot\BootloadManagerInterface;
 
+/**
+ * @psalm-import-type TClass from BootloadManagerInterface
+ */
 final class ArrayRegistry implements BootloaderRegistryInterface
 {
     /**
-     * @param array<class-string<BootloaderInterface>, array<non-empty-string, mixed>> $bootloaders
-     * @param array<class-string<BootloaderInterface>> $ignorableBootloaders
+     * @param array<TClass, array<non-empty-string, mixed>> $bootloaders
+     * @param TClass[] $ignorableBootloaders
      */
     public function __construct(
-        private array $bootloaders,
-        private array $ignorableBootloaders = []
+        private readonly array $bootloaders,
+        private readonly array $ignorableBootloaders = []
     ) {
     }
 
-    public function init(Container $container): void
+    public function init(ContainerInterface $container): void
     {
     }
 

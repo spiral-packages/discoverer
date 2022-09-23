@@ -1,56 +1,58 @@
 {
-  "name": "spiral-packages/discoverer",
-  "description": "Discoverer for Spiral Framework",
-  "keywords": [
-    "spiral-packages",
-    "spiral",
-    "discoverer"
-  ],
-  "homepage": "https://github.com/spiral-packages/bootloaders-discover",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "butschster",
-      "email": "butschster@gmail.com",
-      "role": "Developer"
-    }
-  ],
-  "require": {
-    "php": "^8.1",
-    "spiral/framework": "^3.0"
-  },
-  "require-dev": {
-    "spiral/testing": "^2.0",
-    "vimeo/psalm": "^4.9"
-  },
-  "autoload": {
-    "psr-4": {
-      "Spiral\\Discoverer\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Spiral\\Discoverer\\Tests\\App\\": "tests/app",
-      "Spiral\\Discoverer\\Tests\\": "tests/src"
-    }
-  },
-  "extra": {
-    "spiral": {
-      "bootloaders": [
-        "Spiral\\Discoverer\\DiscovererBootloader"
-      ]
-    }
-  },
-  "scripts": {
-    "test": "vendor/bin/phpunit",
-    "psalm": "vendor/bin/psalm --config=psalm.xml ./src"
-  },
-  "config": {
-    "sort-packages": true,
-    "allow-plugins": {
-      "spiral/composer-publish-plugin": true
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "name": "spiral-packages/discoverer",
+    "description": "Discoverer for Spiral Framework",
+    "keywords": [
+        "spiral-packages",
+        "spiral",
+        "discoverer"
+    ],
+    "homepage": "https://github.com/spiral-packages/bootloaders-discover",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "butschster",
+            "email": "butschster@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "spiral/boot": "^3.0",
+        "spiral/core": "^3.0"
+    },
+    "require-dev": {
+        "spiral/framework": "^3.0",
+        "spiral/testing": "^2.0",
+        "vimeo/psalm": "^4.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spiral\\Discoverer\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Spiral\\Discoverer\\Tests\\App\\": "tests/app",
+            "Spiral\\Discoverer\\Tests\\": "tests/src"
+        }
+    },
+    "extra": {
+        "spiral": {
+            "bootloaders": [
+                "Spiral\\Discoverer\\DiscovererBootloader"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "psalm": "vendor/bin/psalm --config=psalm.xml ./src"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "spiral/composer-publish-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

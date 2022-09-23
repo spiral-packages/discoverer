@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace Spiral\Discoverer\Config;
 
 use Spiral\Boot\Bootloader\BootloaderInterface;
+use Spiral\Boot\BootloadManagerInterface;
 use Spiral\Core\InjectableConfig;
 
+/**
+ * @psalm-import-type TClass from BootloadManagerInterface
+ */
 final class DiscovererConfig extends InjectableConfig
 {
     public const CONFIG = 'discoverer';
@@ -16,18 +20,18 @@ final class DiscovererConfig extends InjectableConfig
     ];
 
     /**
-     * @return array<class-string<BootloaderInterface>>|array<class-string<BootloaderInterface>, array<non-empty-string, mixed>>
+     * @return TClass[]|array<TClass, array<non-empty-string, mixed>>
      */
     public function getBootloaders(): array
     {
-        return (array)($this->config['bootloaders'] ?? []);
+        return (array)$this->config['bootloaders'];
     }
 
     /**
-     * @return array<class-string<BootloaderInterface>>
+     * @return TClass[]
      */
     public function getIgnoredBootloaders(): array
     {
-        return (array)($this->config['ignoredBootloaders'] ?? []);
+        return (array)$this->config['ignoredBootloaders'];
     }
 }
