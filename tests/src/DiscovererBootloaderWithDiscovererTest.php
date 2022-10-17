@@ -16,7 +16,7 @@ final class DiscovererBootloaderWithDiscovererTest extends TestCase
     protected function setUp(): void
     {
         $this->discoverer = m::mock(DiscovererInterface::class);
-        $this->beforeBooting(function (Container $container) {
+        $this->beforeInit(function (Container $container) {
             $container->bindSingleton(DiscovererInterface::class, $this->discoverer);
         });
 
