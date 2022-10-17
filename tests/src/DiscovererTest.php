@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spiral\Discoverer\Tests;
 
-use Spiral\Core\Container;
+use Psr\Container\ContainerInterface;
 use Spiral\Discoverer\Discoverer;
 use Spiral\Discoverer\DiscovererRegistryInterface;
 use Spiral\Discoverer\Exception\DiscovererRegistryException;
@@ -30,7 +30,7 @@ final class DiscovererTest extends TestCase
                     ];
                 }
 
-                public function init(Container $container): void
+                public function init(ContainerInterface $container): void
                 {
 
                 }
