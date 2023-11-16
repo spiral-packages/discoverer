@@ -10,12 +10,9 @@ use Spiral\Discoverer\Tests\TestCase;
 
 final class BootloadersDiscovererTest extends TestCase
 {
-    public function testGetsName()
+    public function testGetsName(): void
     {
-        return $this->assertSame(
-            'bootloaders',
-            BootloadersDiscoverer::getName()
-        );
+        $this->assertSame('bootloaders', BootloadersDiscoverer::getName());
     }
 
     public function testDiscover(): void

@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace Spiral\Discoverer\Bootloader;
 
 use Psr\Container\ContainerInterface;
+use Spiral\Boot\BootloadManagerInterface;
 use Spiral\Discoverer\Config\DiscovererConfig;
 
+/**
+ * @psalm-import-type TClass from BootloadManagerInterface
+ */
 final class ConfigRegistry implements BootloaderRegistryInterface
 {
     private ?DiscovererConfig $config = null;
@@ -21,6 +25,9 @@ final class ConfigRegistry implements BootloaderRegistryInterface
         \assert($this->config instanceof DiscovererConfig);
     }
 
+    /**
+     * @return TClass[]|array<TClass, array<string, mixed>>
+     */
     public function getBootloaders(): array
     {
         return $this->config !== null ? $this->config->getBootloaders() : [];
