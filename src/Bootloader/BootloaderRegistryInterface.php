@@ -13,7 +13,7 @@ use Spiral\Discoverer\RegistryInterface;
 interface BootloaderRegistryInterface extends RegistryInterface
 {
     /**
-     * @return TClass[]|array<TClass, array<non-empty-string, mixed>>
+     * @return TClass[]|array<TClass, array<string, mixed>>
      */
     public function getBootloaders(): array;
 

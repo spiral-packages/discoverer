@@ -46,7 +46,7 @@ final class DiscovererTest extends TestCase
     public function testNonExistDiscovererShouldThrowAnException()
     {
         $this->expectException(DiscovererRegistryException::class);
-        $this->expectErrorMessage('Registry with name [test] does not exist.');
+        $this->expectExceptionMessage('Registry with name [test] does not exist.');
 
         $discoverer = new Discoverer($this->getContainer());
         $discoverer->discover('test');
